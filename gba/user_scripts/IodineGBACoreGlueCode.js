@@ -16,6 +16,7 @@
  *
  */
 var games = {
+    "pokemonlightplat":"Pokemon Light Platinum",
     "advancewars":"Advance Wars",
     "advancewars2":"Advance Wars 2",
     "aladdin":"Aladdin",
