@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jnlp spec="1.0+" codebase=
 "https://ouroboroz.github.io/sciencebowl/Resources" 
-    href="Resources/sciencebowlclock_webstart.jnlp">
+    href="webstart/sciencebowlclock_webstart.jnlp">
     <information>
         <title>Science Bowl Clock</title>
         <vendor>Ouroboroz</vendor>
@@ -10,7 +10,7 @@
         <!-- Application Resources -->
         <j2se version="1.7+"
               href="http://java.sun.com/products/autodl/j2se"/>
-        <jar href="Resources/ScienceBowlClock.jar"
+        <jar href="JARs/ScienceBowlClock.jar"
             main="true" />
 
     </resources>
