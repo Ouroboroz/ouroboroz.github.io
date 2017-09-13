@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase=
+"https://ouroboroz.github.io/sciencebowl/Resources" 
+    href="Resources/sciencebowlclock_webstart.jnlp">
+    <information>
+        <title>Science Bowl Clock</title>
+        <vendor>Ouroboroz</vendor>
+    </information>
+    <resources>
+        <!-- Application Resources -->
+        <j2se version="1.7+"
+              href="http://java.sun.com/products/autodl/j2se"/>
+        <jar href="Resources/ScienceBowlClock.jar"
+            main="true" />
+
+    </resources>
+    <application-desc
+         name="Science Bowl Clock Application"
+         main-class=
+           "Executable.ScienceBowlClock"
+         width="600"
+         height="300">
+     </application-desc>
+     <update check="background"/>
+</jnlp>               
