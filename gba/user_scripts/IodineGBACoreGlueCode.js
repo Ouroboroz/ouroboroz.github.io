@@ -18,6 +18,7 @@
 var games = {
     "pokemonglaze":"Pokemon Glazed",
     "pokemonlightplat":"Pokemon Light Platinum",
+    "pokemondarkviolet":"Pokemon Dark Violet",
     "advancewars":"Advance Wars",
     "advancewars2":"Advance Wars 2",
     "aladdin":"Aladdin",
