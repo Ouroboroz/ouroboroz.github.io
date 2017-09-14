@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jnlp spec="1.0+" codebase=
+<jnlp spec="1.8.0" codebase=
 "https://ouroboroz.github.io/sciencebowl/Resources" 
     href="webstart/sciencebowlclock_webstart.jnlp">
     <information>
@@ -8,6 +8,7 @@
     </information>
     <resources>
         <!-- Application Resources -->
+        <java version="1.7+"/>
         <jar href="JARs/ScienceBowlClock.jar"
             main="true" />
 
