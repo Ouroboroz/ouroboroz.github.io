@@ -1,0 +1,55 @@
+\documentclass[titlepage]{article}
+\usepackage{amsmath}
+\usepackage[letterpaper, total={6.5in, 9in}]{geometry}
+\title{Spy Problem #2}
+\author{Kevin, Richard, Daniel, Andrew}
+\begin{document}
+\maketitle
+\section{Problem}
+Our friend the spy( who escaped from the diamon-smugglers in Problem # 1) is on a secret mission in space. An encounter with an enemy agent leaves him with a mild concussion that causes him to forget where he is. Fortunately, he somehow remembers( from his highschool calculus class, no doubt), the formula for the height of a projectile:\\
+\begin{center}
+	$h(t) = -\frac{1}{2}gt^2+v_0t+h_0$
+\end{center}
+\\
+where $v_0$ and $h_0$ are the initial velocity and height respectively and the values for $g$ for various heavenly bodies. Therefore, to deduce his whereabouts, he throws a rock/ directly upwards(from ground level) and makes the two observations:
+\begin{enumerate}
+	\item[i)]
+	in 3 seconds, the rock, still rising, reaches a height of $108$ feet
+	\item[ii)]
+	the rock eventually reaches a maximum height of $121.5$ feet
+\end{enumerate}
+to enable him to determine the value of $g$ for this location. \textbf{WHERE IS OUR HERO?}
+\\
+(Note: You will need to know the different values of $g$ at various places: $32\;\frac{ft}{sec^2}$ on Earth, $5.5\;\frac{ft}{sec^2}$ on the moon(of Earth), $12\;\frac{ft}{sec^2}$ on Mars, $28\;\frac{ft}{sec^2}$ on Venus, etc)\\
+
+Writer's Note: The original height equation is $h(t) = \frac{1}{2}gt^2+v_0t+h_0$ but I added in a $-$ in order to allow the numeric value of $g$ to be positive since relatively, $g$ and $v_0$ point in different directions.
+\section{Solution}
+We first approach the problem by determining the variables that we do not know. At first glance, we see that there are $4$ different variables in the height equation: $v_0,\;g,\;h_0\; and\; t$. We immediately notice that we already know $h_0 = 0$ since Captain Calculus threw the object from the ground level. Now we have 3 variables left.\\
+
+With only two conditions to help us, let us substitute in the values of the two conditions and see what we can do with them.\\
+Conditition 1:\\
+$h(3) = -(3)^2*\frac{1}{2}g+3+v_0$ \\
+$\rightarrow 108 = -\frac{9}{2}g+3v_0$\\
+Condition 2:\\
+$h(t_h) = -\frac{1}{2}g*(t_h)^2+v*t_h$ where $t_h$ is the amount of time it takes for the object to reach the highest point.\\
+Although we seemingly introduced a new unknown variable, we actually know what value $t_h$ is in terms of $g$ and $v_0$. We know that the velocity of the object is $0\frac{ft}{sec}$ at the very top of its path so $t_h = \frac{v_0}{g}$. Thus:\\
+$\rightarrow 121.5=-\frac{1}{2}*g*(\frac{v_0}{g})^2+v_0*\frac{v_0}{g}$\\
+$\rightarrow 121.5 = \frac{v_0^2}{2g}$\\
+We shall be expressing $v_0$ in terms of $g$ so we can more easily use it later:\\
+$v_0 = \sqrt{2*121.5*g} = \sqrt{243g}$
+\\
+
+Wow would you look at that! We have two equations with two unknowns! Now we can totally solve it:\\
+$108 = -\frac{9}{2}g+3v_0$\\
+$v_0 = \sqrt{2*121.5*g} = \sqrt{243g}$\\
+$\rightarrow 108 = -\frac{9}{2}g+3\sqrt{243g}$\\
+$\rightarrow 108 +\frac{9}{2}g = 3\sqrt{243g}$\\
+$\rightarrow 36 +\frac{3}{2}g = \sqrt{243g}$\\
+$\rightarrow (36 +\frac{3}{2}g)^2 = (\sqrt{243g})^2$\\
+$\rightarrow 36^2 +\frac{9}{4}g^2 + 36*3g = 243g$\\
+$\rightarrow \frac{9}{4}g^2-135g+1296 = 0$\\
+$\rightarrow g = 12$ or $48$
+\\
+
+Although both $12\;\frac{ft}{sec^2}$ and $48\;\frac{ft}{sec^2}$ can be answers, only $12\;\frac{ft}{sec^2}$ is an answer since that is the only one that matches with the charts(we checked). Thus, Captain Calculus is on Mars with a gravity of $12\;\frac{ft}{sec^2}$.
+\end{document}
