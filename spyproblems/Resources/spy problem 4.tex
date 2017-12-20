@@ -1,0 +1,67 @@
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[inline]{enumitem}  
+\usepackage[letterpaper, total={7.5in, 10in}]{geometry}
+\title{Spy Problem 4}
+\author{Andrew Shen, Kevin Yang, Richard Ye, and Daniel Zhan}
+
+\begin{document}
+	\maketitle
+	\section{Problem}
+	The spy after having his lunch date with Miss D'Dnominator and diffusing the bomb, is driving a $2009$ Lemnis-Cate sports car, which after the brakes are applied, can decelerate at a rate given by $-4\sqrt{x+12}\;\frac{ft}{s^2}$, where $v$ is the velocity of the car at any time $t$. He is driving at a speed of $60\;\frac{mi}{h}$($88\;\frac{ft}{s}$) on the Espionage Highway, in the remote republic of San DiBeeches. Suddenly, he sees a Llama in the road!! The automatic laser range determinator(or is it determinant) immediately alerts him that the llama is $200\;ft$ in front of him. After a reaction time of $0.7\;s$, he steps on the brake and, the critical question is posed:
+	\begin{center}
+		\Large{\textbf{Will Our Hero Stop Before Hitting the Llama?}}
+		\\
+		\textbf{(Or Will llama burgers be the special of the day at the local eatery?)}
+	\end{center}
+	If:\\
+	\begin{enumerate}
+		\item[a)]\textbf{The llama is hit, what is the speed of the car at the moment of the impact?}
+		\item[b)]\textbf{The llama is not hit, by what distance does the car stop ahead of the llama?}
+	\end{enumerate}
+	\section{Solution}
+		\subsection{Understanding the Problem}
+			We see that the acceleration is a function in terms of the velocity at a certain given point of time. Since we know that acceleration is simply the derivative of the velocity function in terms of $t$, $a=-4\sqrt{v+12}$ is simply a first order, non-linear differential equation. 
+			\begin{center}
+				$\frac{dv}{dt} = -4\sqrt{v+12}$
+			\end{center}
+		\subsection{Solving For Velocity Function}
+			We note that the differential equation is autonomous since it is in the form $y' = f(t,y)$ and $f(t,y) = -4\sqrt{v+12}$ lacks the variable $t$.\\
+			To solve, we simply integrate both sides based on $t$:
+			\begin{center}
+				$\frac{dv}{dt} = -4\sqrt{v+12} \rightarrow \frac{\frac{dv}{dt}}{\sqrt{v+12}} = -4$\\
+				$\rightarrow \int \frac{\frac{dv}{dt}}{\sqrt{v+12}}dt = -4dt$ \\
+				$\rightarrow \int \frac{dv}{\sqrt{v+12}} = -4t+C$\\
+				$\rightarrow 2\sqrt{v+12} = -4t+C$\\
+				$ \rightarrow v(t) = 4(t+C)^2-12$
+			\end{center}
+			We see that our derived function for velocity has a unknown constant. This expected since this is an autonomous equation.\\
+			We are given the initial condition that at $t=0$, $v = v_0 = 88\;\frac{ft}{s}$. We substitute the point $(0,88)$ into our derived equation for velocity to determine the constant.
+			\begin{center}
+				$88 = 4(0+C)^2-12 \rightarrow 4(C)^2 = 100$\\
+				$\rightarrow C = \pm 5$
+			\end{center}
+			To determine whether the constant is positive or negative, we think back to our given conditions. Can bound $0\le t\le 5$ and $v \ge -12$. Any $t$ less than $0$ is impossible since time cannot be negative and any time larger than $5$ seconds is trivial, since the car reaches a velocity of $-12\frac{ft}{s}$ at $t=5$ so the velocity afterwards would always be constant since $a=0$ for $v=-12$. Any $v$ less than $-12$ is impossible for the car since the acceleration is $0$ at $v=-12$. Only when $C = -5$ will $\frac{dv}{dt} = -4\sqrt{v+12}$.
+			\\
+			\textbf{NOTE: Proceding, we will be solving the functions on the interval of $t:[0,5]$.}
+			\begin{center}
+				$v(t)=4(5-t)^2 - 12$
+			\end{center}
+		\subsection{Solving For the Position Function}
+			Now that we have the velocity function. We can easily solve for the position function by taking the indefinite integral of the velocity.
+			\begin{center}
+				$d(t) = \int v(t)dt = \int 4(5-t)^2 - 12 \; dt$ \\
+				$=\int 4t^2-40t+100 - 12\;dt = \frac{4}{3}t^3-20t^2+88t$ \\
+				$d(t) = \frac{4}{3}t^3-20t^2+88t$
+			\end{center}
+			We let the contant $C$ that we produce through integration to be $0$ since we assigned car's starting position to be the origin.
+		\subsection{Will the Llama Die?}
+			To determine if the Llama will die, we simply have to see if at the time the car comes to a complete stop(accounting for the reaction time), is the position greater than the position of the Llama($200\;ft$).\\
+			The time it takes for the car to come to a complete stop is:
+			\begin{center}
+				$4(t-5)^2-12 = 0$\\
+				$t = 5-\sqrt{3}$
+			\end{center}
+			Thus, the distance the car travels before it fully stops is $\frac{320}{3} + 8\sqrt(3)\; ft$. However, we also have to account for the distance traveled due to reaction time so the total stopping distance is $\frac{320}{3} + 8\sqrt(3) + 88*0.7 = 182.123\;ft$. Since $182.123 < 200$, the \textbf{Llama will not die}. Yay! But Captain Calculus won't be able to enjoy some llama burgers. D: In fact, there will be a distance of $200-182.123 = 17.8769...\approx 17.877\;ft$ between the car and the llama.
+\end{document}
