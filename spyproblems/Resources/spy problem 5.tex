@@ -1,0 +1,74 @@
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[inline]{enumitem}  
+\usepackage[letterpaper, total={7.5in, 10in}]{geometry}
+\title{Spy Problem 4}
+\author{Andrew Shen, Kevin Yang, Richard Ye, and Daniel Zhan}
+
+\begin{document}
+	\maketitle
+	\section{Problem}
+	The spy, who has finally escaped from the ALLU(Angry Llama Lover's Union), has discovered that his good friend, Salvatore (Sal) Manella, has been found after having been murdered, in a freezer (perhaps he s bad meat?) where the air temprature is $10^oF$.
+	\\
+	The spy rememberes Newton's Law of Cooling from his high school Calculus class, which states that the rate at which an object's temperature is changing at any time roughly proportional to the difference between the object'stemperature and the temperature of the medium in which the object resides. So, letting $T$ be the temperature of Sal's body at any time $t$, then $\frac{dT}{dt} = k(T-T_s)$, where $k$ is a (negative) constant and $T_s$ is the temperature of the air where Sal's body is found Also, he decided to let $T_d$ be the temperature of the body at the time of sal's death, which he took to be $t=0$.
+	\\
+	The spy is toldthat Sal's body temperature was $45^oF$ when it was discovered at $2 pm$ on Thursday, and after local authorities completed their investigation one hour later, sal's car-ass(measured with a rectal thermometer?) dropped another $1.3^oF$ before it was taken to the morgue. Our hero knows that the dastardly deed was committed was either Eco li or by Bo Tulism. If Li was in jail from Monday until noon on Wednesday, and Tulism was at the annual "Death by Poison" convention from noon on Wednesday until Friday, who "butchered" Sal, and when?
+	\\
+	Note: You may assume that Sal's body temperature at the time of death was a normal $98.6^oF$. Also, in addition to answering the question, your solution to the problem should include a step-by-step solution to the intial value problem resulting in a function in terms of $t$ (with all constants determined) that gives Sal's body temperature at any time $t$ since his death.
+	\section{Solution}
+	\subsection{Understanding the Problem}
+	We see that the change in temperature of Sal's body $T$ is directly proportional to the temperature difference between the body temperature and the surrounding temperature $T_s = 10^oF$. The differential equation $\frac{dT}{dt} = k(T-T_s)$ is a first order, linear, non-homogeneous differential equation.
+	\subsection{Solving for the Temperature Function}
+	We note that the differential equation is separable. This removes the need for us to find the homogeneous and particular solutions.
+	\begin{center}
+		$\frac{dT}{dt} = k(T-T_s)$ \\
+		$\rightarrow \frac{dT}{T-T_s} = kdt  \rightarrow \int \frac{dT}{T-T_s} = \int kdt$ \\
+		$\rightarrow ln(T-T_s) = kt+C \rightarrow T-T_s = e^{kt+C}$ \\
+		$\rightarrow T = Ce^{kt}+T_s$ \\
+		$\rightarrow T = Ce^{kt}+10$
+	\end{center}
+	We see that we end up having 2 undetermined constants - $C$ and $k$. We will be able to use an initial condition to calculate $C$ and $k$ is computable using various known datapoints.
+	\subsection{Solving the IVP}
+	Our initial value comes from the fact that at $t=0$, Sal's body temperature is the normal $98.6^oF$. Knowing this, we simply substitute the point $(0,98.6)$ to fjnd the value of $C$.
+	\begin{center}
+		$T = Ce^{kt}+T_s \rightarrow 98.6 = Ce^{k*0}+10$ \\
+		$\rightarrow C= 88.6$
+	\end{center}
+	Thus, the equation of Sal's body temperature is $T = 88.6e^{kt}+10$. However, we have still have to find the value of $k$.
+	\subsection{Finding $k$}
+	To find the value of $k$, we simply use $2$ known datapoints to set up a system of equations. We know that at $2\;pm$ the body had a temperature of $45^oF$ and dropped $1.3^oF$ in $1$ hour. \\
+	Since we are trying to compute the time of death, let us call the time between death to $2\;pm$ to be $\tau$. Thus, \\
+	\[
+	\left\{ 
+	\begin{array}{c}
+		45 = 88.6e^{k\tau}+10 \\
+		45-1.3 = 88.6e^{k*(\tau+1)}+10
+	\end{array}
+	\right.
+	\]
+	\[
+	\rightarrow 
+	\left\{\begin{array}{c}
+		35 = 88.6e^{k\tau}\\
+		33.7 = 88.6e^{k\tau+k}
+	\end{array} 
+	\right.
+	\]
+	To find $k$, we simply divide the two equations above,
+	\begin{center}
+	$e^{-k} = \frac{35}{33.7}$ \\
+	$\rightarrow k = -ln(\frac{35}{33.7})$ \\
+	$\rightarrow k = -0.03785022 \approx -0.03785$
+	\end{center}
+	Thus, the full function of the temperature of Sal's body after death is $T = 88.6e^{-0.03785t}+10$. Note that for this function, $t$ is measured in hours. 
+	\subsection{Finding the Time of Death}
+	We know that the temperature of the body is $45^oF$ at $2\;pm$. We can find the amount of time that it took for the body to reach $45^oF$.
+	\begin{center}
+		$45 = 88.6e^{-0.03785t}+10$ \\
+		$\rightarrow 35 = 88.6e^{-0.03785t} \rightarrow e^{-0.03785t} = \frac{35}{88.6}$ \\
+		$\rightarrow -0.03785t = ln(\frac{35}{88.6}) \rightarrow t = \frac{ln(\frac{35}{88.6})}{-0.03785}$\\
+		$\rightarrow t = 24.5383962\;h$
+	\end{center}
+	Since the body took $24.5383962\;h$ or $1$ day and $32.3\;min$ to reach $2\;pm$ Thursday, Sal must have died at about $1:28\;pm$ Wednesday. Since Tulism was at the annual "Death by Poison" convention at that time, the murderer must be the evil, creator of bad meat, Eco Li at $1:28$ on Wednesday. 
+\end{document}
