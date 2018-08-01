@@ -3,7 +3,7 @@ layout: post
 title: "Making Food"
 date: 2018-07-22
 ---
-So what is up with the sudden resurrection of blog posts? Well, I am trying to apply for a position to blog for MIT Admissions and I thought it would be a good opportunity to blog for my own sake. As I am transitioning to MIT, I think taht writing a blog would be beneficial for me to get my ideas out there and sort out my thoughts. Okay, enough boring stuff, lets get to the meat of the blog. 
+So what is up with the sudden resurrection of blog posts? Well, I am trying to apply for a position to blog for MIT Admissions and I thought it would be a good opportunity to blog for my own sake. As I am transitioning to MIT, I think that writing a blog would be beneficial for me to get my ideas out there and sort out my thoughts. Okay, enough boring stuff, lets get to the meat of the blog. 
 
 So for the application, I am allowed to choose a prompt from <a href="https://twitter.com/dailyblogprompt/status/810617500404682752">Daily Blog Prompts</a> on twitter and write about it. After looking through nearly 2 years of tweets(and realized that there are a TON of reposts and that it was a MIT based twitter account), I decided that I would answer "What's the most elaborate, complicated meal you've ever cooked? Was it awesome, or was it a disaster?". Obviously, I would choose a topic that I have barely any experience with and completely horrible at. To be honest, I think the majority of meals that I've made was just ramen or insta noodles. (The college prep ya know?) But I don't think that ramen noodles is worthy of a meal to blog about so here goes nothing. I will be walking you through the process in which I made egg drop soup. 
 
