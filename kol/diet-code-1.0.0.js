@@ -90,6 +90,8 @@ function tehtmi(diet_settings) {
 	var nightcap_limit = diet_settings["nightcap limit"]
 	
 	var workshed = diet_settings["workshed"]
+	var standard = diet_settings["standard"]
+	var level = diet_settings["level"]
 	
 	var excluded = diet_settings["excluded consumables"]
 	
@@ -166,6 +168,15 @@ function tehtmi(diet_settings) {
 		}
 	}
 	
+	function calculate_limit(item, standard, level){
+		if (item["level"] <= level)
+			if (standard)
+				return 1
+			return item["level"]
+
+		return 0
+	}
+
 	function calculate_adventures(item, opts) {
 		var sum = 0.0
 		var count = 0.0
@@ -337,7 +348,7 @@ function tehtmi(diet_settings) {
 			pvp = item["pvpfights"]
 			value += pvp * fight_value
 		}
-		var spec = {"item": item, "opts": opts, "value": value, "size": item["size"], "adv": adv, "pvp": pvp, "price": price, "limit": item["limit"]}
+		var spec = {"item": item, "opts": opts, "value": value, "size": item["size"], "adv": adv, "pvp": pvp, "price": price, "limit": calculate_limit(item, standard, level)}
 		
 		if(opts["fortune"]) {
 			spec.fortune_value = fvalue
@@ -393,7 +404,7 @@ function tehtmi(diet_settings) {
 		
 		var key = size
 		var after_nightcap_spec
-		if(item["limit"]) {
+		if(calculate_limit(item, standard, level)) {
 			key = key + item["name"]
 		} else if(item["speakeasy"]) {
 			key = key + "speakeasy"
@@ -587,13 +598,13 @@ function tehtmi(diet_settings) {
 					}
 				}
 			} else if(item["type"] == "extender") {
-				var spec = {"item": item, "value": -item["price"], "size": item["size"], "limit": item["limit"], "price": item["price"], "adv": 0}
+				var spec = {"item": item, "value": -item["price"], "size": item["size"], "limit": calculate_limit(item, standard, level), "price": item["price"], "adv": 0}
 				extenders.push(spec)
 			} else if(item["type"] == "simple") {
 				var adv = (item["advmin"] + item["advmax"]) / 2
 				var pvp = item["pvpfights"]
 				var value = adv * adv_value + pvp * fight_value - item["price"]
-				var spec = {"item": item, "value": value, "adv": adv, "pvp": pvp, "price": item["price"], "limit": item["limit"]}
+				var spec = {"item": item, "value": value, "adv": adv, "pvp": pvp, "price": item["price"], "limit": calculate_limit(item, standard, level)}
 				simple.push(spec)
 			}
 			if(item["name"] == "potion of the field gar") {
@@ -805,7 +816,7 @@ function tehtmi(diet_settings) {
 				add_to_list(booze_real_items, spec)
 			} else if(size[1] < 0) {
 				add_to_list(booze_helpers, spec)
-			} else if(size[1] > 0 || has_mayodiol || (mayodiol_item && item["type"] == "food" && item["limit"] && workshed == "mayo")) {
+			} else if(size[1] > 0 || has_mayodiol || (mayodiol_item && item["type"] == "food" && calculate_limit(item, standard, level) && workshed == "mayo")) {
 				add_to_list(booze_helpers, spec)
 			} else if(spec["opts"] && (spec["opts"]["fudge spork"] || spec["opts"]["fortune"]) || spec.limit) {
 				//if(include_nightcap && size[1] > 0 && item["type"] == "food") {

@@ -531,6 +531,11 @@ function recompute_diet() {
 	settings["classid"] = parseInt(saved_settings.classid, 10)
 	settings["semirares available"] = parseInt(saved_settings.semirares, 10)
 	settings["workshed"] = saved_settings.workshed
+	settings["standard"] = saved_settings.standard
+	if (saved_settings.standard && saved_settings.level == 13)
+		settings["level"] = 12
+	else
+		settings["level"] = parseInt(saved_settings.level)
 	settings["nightcap limit"] = parseInt(saved_settings.nightcap_limit, 10)
 	settings["use potion of the field gar"] = ((saved_settings.ismonday == "yes") ? "no" : "yes")
 	
@@ -834,7 +839,7 @@ function import_settings_all() {
 }
 
 var ids = [
-	"value", "organ", "nightcap", "ismonday", "classid", "semirares", "workshed",
+	"value", "organ", "nightcap", "ismonday", "classid", "semirares", "workshed", "standard", "level",
 	"saucemaven", "pizzalover", "breakfast", "coldone", "recall",
 	"tuxedo", "mafiaring", "mimeglass", "tps", "pantsgiving", "sweatpants", "distention", "doghair",
 	"speakeasy",

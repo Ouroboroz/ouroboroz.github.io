@@ -1633,9 +1633,18 @@ def load():
          if int(idx) >= consumable_length:
             ingredient_costs[ingredients[int(idx)-consumable_length]] = int(price)
          else:
-            diet_consumables[int(idx)]["price"] = float(price)
+            diet_consumables[int(idx)]["price"] = int(price)
    ingredient_costs['magicalness-in-a-can'] = diet_consumables[2]["price"]
    ingredient_costs['bowl of cottage cheese'] = diet_consumables[7]["price"]
+
+   with open('consumable_levels.txt', 'r') as f:
+      for line in f:
+         idx, level = line.split()
+         idx, level = int(idx), int(level)
+         if idx >= consumable_length:
+            break
+         diet_consumables[idx]["level"] = level
+
 
    for consumable_idx in range(len(CBB_consumables)):
       consumable = CBB_consumables[consumable_idx]['name']
