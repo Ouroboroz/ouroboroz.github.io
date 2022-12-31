@@ -1575,26 +1575,77 @@ diet_consumables = [
 ,   { "name": "Boulevardier cocktail", "advmin": 3, "advmax": 4, "price": 50000, "type": "booze", "size": [0, 1, 0] }
 ,   { "name": "bowl full of jelly", "advmin": 5, "advmax": 6, "price": 2370.58, "type": "food", "size": [1, 0, 0] }
 ,   { "name": "Eye and a Twist", "advmin": 5, "advmax": 6, "price": 7964.69, "type": "booze", "size": [0, 1, 0] }
-,   { "name": "marshmallow bomb", "advmin": 9, "advmax": 11, "price": 15999, "type": "booze", "size": [0, 2, 0] }
+,   { "name": "marshmallow bomb", "advmin": 9, "advmax": 11, "price": 15999, "type": "booze", "size": [0, 2, 0] } ] 
+
+CBB_consumables = [  
+   { "name": "Boris's beer", "advmin": 5, "advmax": 7, "price": 999, "type": "booze", "size": [0, 1, 0] }
+,   { "name": "honey bun of Boris", "advmin": 5, "advmax": 7, "price": 999, "type": "food", "size": [1, 0, 0] }
+,   { "name": "ratatouille de Jarlsberg", "advmin": 5, "advmax": 7, "price": 999, "type": "food", "size": [1, 0, 0] }
+,   { "name": "Jarlsberg's vegetable soup", "advmin": 5, "advmax": 7, "price": 999, "type": "food", "size": [1, 0, 0] }
+,   { "name": "Pete's wiley whey bar", "advmin": 5, "advmax": 7, "price": 999, "type": "food", "size": [1, 0, 0] }
+,   { "name": "St. Pete's sneaky smoothie", "advmin": 5, "advmax": 7, "price": 999, "type": "food", "size": [1, 0, 0] }
+,   { "name": "Boris's bread", "advmin": 6, "advmax": 8, "price": 999, "type": "food", "size": [1, 0, 0] }
+,   { "name": "roasted vegetable of Jarlsberg", "advmin": 6, "advmax": 8, "price": 999, "type": "food", "size": [1, 0, 0] }
+,   { "name": "Pete's rich ricotta", "advmin": 6, "advmax": 8, "price": 999, "type": "food", "size": [1, 0, 0] }
+,   { "name": "roasted vegetable focaccia", "advmin": 15, "advmax": 17, "price": 1999, "type": "food", "size": [2, 0, 0] }
+,   { "name": "plain calzone", "advmin": 15, "advmax": 17, "price": 1999, "type": "food", "size": [2, 0, 0], "item class": "pizza" }
+,   { "name": "baked veggie ricotta casserole", "advmin": 15, "advmax": 17, "price": 1999, "type": "food", "size": [2, 0, 0] }
 ]
+
+consumable_length = len(diet_consumables)
+# CBB stuff
+ingredients = ["Yeast of Boris", "Vegetable of Jarlsberg", "St. Sneaky Pete's Whey", "spices"]
+ingredient_costs = {"flat dough":70, 'wad of dough': 50, "strawberry": 50}
+CBB_cooking_matrix = {"Boris's beer": ["Yeast of Boris", "bowl of cottage cheese"],
+                  "honey bun of Boris": ["Yeast of Boris", "flat dough"],
+                  "ratatouille de Jarlsberg": ["Vegetable of Jarlsberg", "spices"],
+                  "Jarlsberg's vegetable soup": ["Vegetable of Jarlsberg", "magicalness-in-a-can"],
+                  "Pete's wiley whey bar": ["St. Sneaky Pete's Whey", "wad of dough"],
+                  "St. Pete's sneaky smoothie": ["St. Sneaky Pete's Whey", "strawberry"],
+                  "Boris's bread": ["Yeast of Boris", "Yeast of Boris"],
+                  "roasted vegetable of Jarlsberg" : ["Vegetable of Jarlsberg", "Vegetable of Jarlsberg"],
+                  "Pete's rich ricotta": ["St. Sneaky Pete's Whey", "St. Sneaky Pete's Whey"],
+                  "roasted vegetable focaccia": ["Yeast of Boris", "Yeast of Boris", "Vegetable of Jarlsberg", "Vegetable of Jarlsberg"],
+                  "plain calzone": ["St. Sneaky Pete's Whey", "St. Sneaky Pete's Whey", "Yeast of Boris", "Yeast of Boris"],
+                  "baked veggie ricotta casserole": ["Vegetable of Jarlsberg", "Vegetable of Jarlsberg", "St. Sneaky Pete's Whey", "St. Sneaky Pete's Whey"]
+                  }
 
 import json
 def save():
-   row = None
+   c = 0
    with open('diet_consumables.txt','w') as f:
       f.write('{')
       for row in diet_consumables:
+         if c != 0:
+            f.write(',')
+         c += 1
+         f.write("\""+row['name']+"\"")
+      for ingredient in ingredients:
          if row is not None:
             f.write(',')
-         f.write("\""+row['name']+"\"")
+         f.write("\""+ingredient+"\"")
       f.write('};')
 
 def load():
    with open('diet_prices.txt', 'r') as f:
       for line in f:
          idx, price = line.split()
-         diet_consumables[int(idx)]["price"] = float(price)
+         if int(idx) >= consumable_length:
+            ingredient_costs[ingredients[int(idx)-consumable_length]] = int(price)
+         else:
+            diet_consumables[int(idx)]["price"] = float(price)
+   ingredient_costs['magicalness-in-a-can'] = diet_consumables[2]["price"]
+   ingredient_costs['bowl of cottage cheese'] = diet_consumables[7]["price"]
+
+   for consumable_idx in range(len(CBB_consumables)):
+      consumable = CBB_consumables[consumable_idx]['name']
+      cook_ingredients = CBB_cooking_matrix[consumable]
+      price = 0
+      for ingredient in cook_ingredients:
+         price += ingredient_costs[ingredient]
+      CBB_consumables[consumable_idx]['price'] = price
+
    with open('diet_data.txt','w') as f:
-      f.write(json.dumps(diet_consumables))
+      f.write(json.dumps(diet_consumables + CBB_consumables))
 
 load()
