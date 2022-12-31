@@ -408,6 +408,10 @@ function optimize_settings(settings, container) {
 
 		if (saved_settings.pantsgiving)
 			organ_sizes[0] += 1
+		if (saved_settings.distention)
+			organ_sizes[0] += 1
+		if (saved_settings.doghair)
+			organ_sizes[1] += 1
 		organ_sizes[1] += parseInt(saved_settings.sweatpants)
 
 		settings["organ sizes"] = organ_sizes
@@ -515,6 +519,8 @@ function recompute_diet() {
 	settings["mime army shotglass available"] = saved_settings.mimeglass
 	settings["pantsgiving available"] = saved_settings.pantsgiving
 	settings["designer sweatpants available"] = saved_settings.sweatpants
+	settings["distention pill available"] = saved_settings.distention
+	settings["synthetic dog hair pill available"] = saved_settings.doghair
 	settings["saucemaven available"] = saved_settings.saucemaven
 	settings["pizza lover available"] = saved_settings.pizzalover
 	settings["spaghetti breakfast available"] = saved_settings.breakfast
@@ -830,7 +836,7 @@ function import_settings_all() {
 var ids = [
 	"value", "organ", "nightcap", "ismonday", "classid", "semirares", "workshed",
 	"saucemaven", "pizzalover", "breakfast", "coldone", "recall",
-	"tuxedo", "mafiaring", "mimeglass", "tps", "pantsgiving", "sweatpants",
+	"tuxedo", "mafiaring", "mimeglass", "tps", "pantsgiving", "sweatpants", "distention", "doghair",
 	"speakeasy",
 	"adventure_value", "pvpfight_value",
 	"food_space", "booze_space", "spleen_space",
