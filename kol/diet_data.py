@@ -1084,17 +1084,6 @@ diet_consumables = [
 ,   { "name": "liquid shifting time weirdness", "advmin": 0, "advmax": 0, "price": 14526.83, "type": "spleen", "size": [0, 0, 2] }
 ,   { "name": "rack of dinosaur ribs", "advmin": 15, "advmax": 18, "price": 1394117.6470588, "type": "food", "size": [3, 0, 0] }
 ,   { "name": "scotch on the rocks", "advmin": 15, "advmax": 18, "price": 849609.73, "type": "booze", "size": [0, 3, 0] }
-,   { "name": "glass of &quot;milk&quot;", "advmin": 2, "advmax": 3, "speakeasy": 250, "type": "booze", "size": [0, 1, 0] }
-,   { "name": "cup of &quot;tea&quot;", "advmin": 2, "advmax": 3, "speakeasy": 250, "type": "booze", "size": [0, 1, 0] }
-,   { "name": "thermos of &quot;whiskey&quot;", "advmin": 2, "advmax": 3, "speakeasy": 250, "type": "booze", "size": [0, 1, 0] }
-,   { "name": "Lucky Lindy", "advmin": 2, "advmax": 4, "speakeasy": 500, "type": "booze", "size": [0, 1, 0] }
-,   { "name": "Bee's Knees", "advmin": 6, "advmax": 8, "speakeasy": 500, "type": "booze", "size": [0, 2, 0] }
-,   { "name": "Sockdollager", "advmin": 6, "advmax": 8, "speakeasy": 500, "type": "booze", "size": [0, 2, 0] }
-,   { "name": "Ish Kabibble", "advmin": 6, "advmax": 8, "speakeasy": 500, "type": "booze", "size": [0, 2, 0] }
-,   { "name": "Hot Socks", "advmin": 10, "advmax": 14, "speakeasy": 5000, "type": "booze", "size": [0, 3, 0] }
-,   { "name": "Phonus Balonus", "advmin": 10, "advmax": 14, "pvpfights": 5, "speakeasy": 10000, "type": "booze", "size": [0, 3, 0] }
-,   { "name": "Flivver", "advmin": 12, "advmax": 13, "speakeasy": 20000, "type": "booze", "size": [0, 2, 0] }
-,   { "name": "Sloppy Jalopy", "advmin": 18, "advmax": 22, "speakeasy": 100000, "type": "booze", "size": [0, 5, 0] }
 ,   { "name": "Sogg-Os", "advmin": 5, "advmax": 5, "price": 9849.2954545455, "type": "food", "size": [1, 0, 0] }
 ,   { "name": "Wet Russian", "advmin": 13, "advmax": 14, "price": 21306.016129032, "type": "booze", "size": [0, 3, 0] }
 ,   { "name": "filet of The Fish", "advmin": 15, "advmax": 18, "price": 95312.333333333, "type": "food", "size": [3, 0, 0] }
@@ -1592,6 +1581,20 @@ CBB_consumables = [
 ,   { "name": "baked veggie ricotta casserole", "advmin": 15, "advmax": 17, "price": 1999, "type": "food", "size": [2, 0, 0] }
 ]
 
+speakeasy_consumables = [
+{ "name": "glass of &quot;milk&quot;", "advmin": 2, "advmax": 3, "speakeasy": 250, "type": "booze", "size": [0, 1, 0] }
+,   { "name": "cup of &quot;tea&quot;", "advmin": 2, "advmax": 3, "speakeasy": 250, "type": "booze", "size": [0, 1, 0] }
+,   { "name": "thermos of &quot;whiskey&quot;", "advmin": 2, "advmax": 3, "speakeasy": 250, "type": "booze", "size": [0, 1, 0] }
+,   { "name": "Lucky Lindy", "advmin": 2, "advmax": 4, "speakeasy": 500, "type": "booze", "size": [0, 1, 0] }
+,   { "name": "Bee's Knees", "advmin": 6, "advmax": 8, "speakeasy": 500, "type": "booze", "size": [0, 2, 0] }
+,   { "name": "Sockdollager", "advmin": 6, "advmax": 8, "speakeasy": 500, "type": "booze", "size": [0, 2, 0] }
+,   { "name": "Ish Kabibble", "advmin": 6, "advmax": 8, "speakeasy": 500, "type": "booze", "size": [0, 2, 0] }
+,   { "name": "Hot Socks", "advmin": 10, "advmax": 14, "speakeasy": 5000, "type": "booze", "size": [0, 3, 0] }
+,   { "name": "Phonus Balonus", "advmin": 10, "advmax": 14, "pvpfights": 5, "speakeasy": 10000, "type": "booze", "size": [0, 3, 0] }
+,   { "name": "Flivver", "advmin": 12, "advmax": 13, "speakeasy": 20000, "type": "booze", "size": [0, 2, 0] }
+,   { "name": "Sloppy Jalopy", "advmin": 18, "advmax": 22, "speakeasy": 100000, "type": "booze", "size": [0, 5, 0] }
+]
+
 consumable_length = len(diet_consumables)
 # CBB stuff
 ingredients = ["Yeast of Boris", "Vegetable of Jarlsberg", "St. Sneaky Pete's Whey", "spices"]
@@ -1609,6 +1612,7 @@ CBB_cooking_matrix = {"Boris's beer": ["Yeast of Boris", "bowl of cottage cheese
                   "plain calzone": ["St. Sneaky Pete's Whey", "St. Sneaky Pete's Whey", "Yeast of Boris", "Yeast of Boris"],
                   "baked veggie ricotta casserole": ["Vegetable of Jarlsberg", "Vegetable of Jarlsberg", "St. Sneaky Pete's Whey", "St. Sneaky Pete's Whey"]
                   }
+
 
 import json
 def save():
@@ -1646,6 +1650,6 @@ def load():
       CBB_consumables[consumable_idx]['price'] = price
 
    with open('diet_data.txt','w') as f:
-      f.write(json.dumps(diet_consumables + CBB_consumables))
+      f.write(json.dumps(diet_consumables + CBB_consumables + speakeasy_consumables))
 
 load()
