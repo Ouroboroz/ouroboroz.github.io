@@ -97,6 +97,10 @@ function tehtmi(diet_settings) {
 	var stomach = organ_settings[0]
 	var liver = organ_settings[1]
 	var spleen = organ_settings[2]
+
+	var deepdish = diet_settings["deepdish available"]
+	var calzone = diet_settings["calzone available"]
+	var pizza = diet_settings["pizza available"]
 	
 	//for(var idx in chocolate_starting_weapon_lookup) {
 	//	console.log(idx, idx == 1, chocolate_starting_weapon_lookup[1], chocolate_starting_weapon_lookup["1"])
@@ -548,6 +552,22 @@ function tehtmi(diet_settings) {
 		   item["name"] == "spaghetti breakfast"
 		) {
 			item["limit"] = 1
+			item.internal_limit = true
+		}
+
+		if(item["name"] == "Deep Dish of Legend" && !deepdish)
+		{	
+			item["limit"] = 0
+			item.internal_limit = true
+		}
+		if(item["name"] == "Calzone of Legend" && !calzone)
+		{	
+			item["limit"] = 0
+			item.internal_limit = true
+		}
+		if(item["name"] == "Pizza of Legend"  && !pizza)
+		{	
+			item["limit"] = 0
 			item.internal_limit = true
 		}
 		
