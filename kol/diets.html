@@ -240,6 +240,28 @@
 		<option  value="mayo">Mayo Clinic</option>
 	</select>
 	
+	<input type="checkbox" id="newlife" onchange="showCBB()"><label for="newlife">New Ascension</label>
+
+	<script>
+	function showCBB() {
+	  var checkBox = document.getElementById("newlife");
+	  var text = document.getElementById("CBB");
+	  var deepdish = document.getElementById("deepdish")
+	  var calzone = document.getElementById("calzone")
+	  var pizza = document.getElementById("pizza")
+	  if (checkBox.checked == true){
+	    text.style.display = "block";
+	  } else {
+	     text.style.display = "none";
+	     deepdish.checked = ""
+	     calzone.checked = ""
+	     pizza.checked = ""
+	     settings_changed()
+	  }
+	}
+	</script>
+
+
 	<fieldset>
 		<legend>Skills</legend>
 		<ul class="checkbox">
@@ -272,6 +294,16 @@
 
 		</ul>
 	</fieldset>
+
+	<fieldset id="CBB" style="display:none">
+		<legend> CBB Legendary Consumables </legend>
+		<ul class="checkbox">
+		<li><input type="checkbox" id="deepdish" onchange="settings_changed()"><label for="deepdish">Deep Dish of Legend</label></li>
+		<li><input type="checkbox" id="calzone" onchange="settings_changed()"><label for="calzone">Calzone of Legend</label></li>
+		<li><input type="checkbox" id="pizza" onchange="settings_changed()"><label for="pizza">Pizza of Legend</label></li>
+		</ul>
+	</fieldset>
+
 	<fieldset>
 		<legend>Clan</legend>
 		<ul class="checkbox">

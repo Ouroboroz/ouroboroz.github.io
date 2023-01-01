@@ -1579,7 +1579,10 @@ CBB_consumables = [
 ,   { "name": "roasted vegetable focaccia", "advmin": 15, "advmax": 17, "price": 1999, "type": "food", "size": [2, 0, 0] }
 ,   { "name": "plain calzone", "advmin": 15, "advmax": 17, "price": 1999, "type": "food", "size": [2, 0, 0], "item class": "pizza" }
 ,   { "name": "baked veggie ricotta casserole", "advmin": 15, "advmax": 17, "price": 1999, "type": "food", "size": [2, 0, 0] }
-]
+,   { "advmin": 18 , "advmax": 22, "price": 9800, "type": "food", "size": [2, 0, 0], "item class": "pizza", "limit": 1 ,"name": "Deep Dish of Legend" }
+,   { "advmin": 18 , "advmax": 22, "price": 9800, "type": "food", "size": [2, 0, 0], "item class": "pizza", "limit": 1 ,"name": "Calzone of Legend" }
+,   { "advmin": 18 , "advmax": 22, "price": 9800, "type": "food", "size": [2, 0, 0], "item class": "pizza", "limit": 1 ,"name": "Pizza of Legend" }
+]  
 
 speakeasy_consumables = [
 { "name": "glass of &quot;milk&quot;", "advmin": 2, "advmax": 3, "speakeasy": 250, "type": "booze", "size": [0, 1, 0] }
@@ -1610,7 +1613,10 @@ CBB_cooking_matrix = {"Boris's beer": ["Yeast of Boris", "bowl of cottage cheese
                   "Pete's rich ricotta": ["St. Sneaky Pete's Whey", "St. Sneaky Pete's Whey"],
                   "roasted vegetable focaccia": ["Yeast of Boris", "Yeast of Boris", "Vegetable of Jarlsberg", "Vegetable of Jarlsberg"],
                   "plain calzone": ["St. Sneaky Pete's Whey", "St. Sneaky Pete's Whey", "Yeast of Boris", "Yeast of Boris"],
-                  "baked veggie ricotta casserole": ["Vegetable of Jarlsberg", "Vegetable of Jarlsberg", "St. Sneaky Pete's Whey", "St. Sneaky Pete's Whey"]
+                  "baked veggie ricotta casserole": ["Vegetable of Jarlsberg", "Vegetable of Jarlsberg", "St. Sneaky Pete's Whey", "St. Sneaky Pete's Whey"],
+                  "Deep Dish of Legend": ["Vegetable of Jarlsberg", "Vegetable of Jarlsberg", "St. Sneaky Pete's Whey", "St. Sneaky Pete's Whey", "Yeast of Boris", "Yeast of Boris"],
+                  "Calzone of Legend": ["Vegetable of Jarlsberg", "Vegetable of Jarlsberg", "St. Sneaky Pete's Whey", "St. Sneaky Pete's Whey", "Yeast of Boris", "Yeast of Boris"],
+                  "Pizza of Legend": ["Vegetable of Jarlsberg", "Vegetable of Jarlsberg", "St. Sneaky Pete's Whey", "St. Sneaky Pete's Whey", "Yeast of Boris", "Yeast of Boris"]
                   }
 
 

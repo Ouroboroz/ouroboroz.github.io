@@ -526,6 +526,9 @@ function recompute_diet() {
 	settings["spaghetti breakfast available"] = saved_settings.breakfast
 	settings["grab a cold one available"] = saved_settings.coldone
 	settings["ancestral recall available"] = saved_settings.recall
+	settings["deepdish available"] = saved_settings.deepdish
+	settings["calzone available"] = saved_settings.calzone
+	settings["pizza available"] = saved_settings.pizza
 	settings["speakeasy"] = saved_settings.speakeasy
 	
 	settings["classid"] = parseInt(saved_settings.classid, 10)
@@ -837,6 +840,7 @@ var ids = [
 	"value", "organ", "nightcap", "ismonday", "classid", "semirares", "workshed",
 	"saucemaven", "pizzalover", "breakfast", "coldone", "recall",
 	"tuxedo", "mafiaring", "mimeglass", "tps", "pantsgiving", "sweatpants", "distention", "doghair",
+	"deepdish", "calzone", "pizza",
 	"speakeasy",
 	"adventure_value", "pvpfight_value",
 	"food_space", "booze_space", "spleen_space",

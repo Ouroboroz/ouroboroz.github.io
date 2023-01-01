@@ -83,6 +83,9 @@ function tehtmi(diet_settings) {
 	var tps_available = diet_settings["tiny plastic sword available"]
 	var mafia_ring_available = diet_settings["mafia pinky ring available"]
 	var mime_shotglass_available = diet_settings["mime army shotglass available"]
+	var deepdish = diet_settings["deepdish available"]
+	var calzone = diet_settings["calzone available"]
+	var pizza = diet_settings["pizza available"]
 	var use_speakeasy = diet_settings.speakeasy
 	var semirares_available = diet_settings["semirares available"]
 	
@@ -281,6 +284,12 @@ function tehtmi(diet_settings) {
 			return 5
 		} else if(item.name == "Cold One" && with_cold_one) {
 			return 5
+		} else if(item.name == "Deep Dish of Legend" && !deepdish){
+			return 999999999
+		} else if(item.name == "Calzone of Legend" && !calzone){
+			return 999999999
+		} else if(item.name == "Pizza of Legend" && !pizza){
+			return 999999999
 		} else if(tps_available && item["tpsprice"] && (!item["price"] || item["tpsprice"] < item["price"])) {
 			return item["tpsprice"]
 		} else if(use_speakeasy && item["speakeasy"]) {
