@@ -412,6 +412,8 @@ function optimize_settings(settings, container) {
 			organ_sizes[0] += 1
 		if (saved_settings.doghair)
 			organ_sizes[1] += 1
+		if (saved_settings.hollowleg)
+			organ_sizes[1] += 1
 		organ_sizes[1] += parseInt(saved_settings.sweatpants)
 
 		settings["organ sizes"] = organ_sizes
@@ -530,6 +532,7 @@ function recompute_diet() {
 	settings["calzone available"] = saved_settings.calzone
 	settings["pizza available"] = saved_settings.pizza
 	settings["speakeasy"] = saved_settings.speakeasy
+	settings["hollowleg"] = saved_settings.hollowleg
 	
 	settings["classid"] = parseInt(saved_settings.classid, 10)
 	settings["semirares available"] = parseInt(saved_settings.semirares, 10)
@@ -841,7 +844,7 @@ var ids = [
 	"saucemaven", "pizzalover", "breakfast", "coldone", "recall",
 	"tuxedo", "mafiaring", "mimeglass", "tps", "pantsgiving", "sweatpants", "distention", "doghair",
 	"deepdish", "calzone", "pizza",
-	"speakeasy",
+	"speakeasy", "hollowleg",
 	"adventure_value", "pvpfight_value",
 	"food_space", "booze_space", "spleen_space",
 	"nightcap_limit",
