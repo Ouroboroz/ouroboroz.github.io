@@ -416,6 +416,9 @@ function optimize_settings(settings, container) {
 			organ_sizes[1] += 1
 		organ_sizes[1] += parseInt(saved_settings.sweatpants)
 
+		if (saved_settings.drinking)
+			organ_sizes[1] += 1
+
 		settings["organ sizes"] = organ_sizes
 
 		var result = tehtmi(settings)
@@ -528,6 +531,7 @@ function recompute_diet() {
 	settings["spaghetti breakfast available"] = saved_settings.breakfast
 	settings["grab a cold one available"] = saved_settings.coldone
 	settings["ancestral recall available"] = saved_settings.recall
+	settings["drinking to drink available"] = saved_settings.drinking
 	settings["deepdish available"] = saved_settings.deepdish
 	settings["calzone available"] = saved_settings.calzone
 	settings["pizza available"] = saved_settings.pizza
@@ -841,7 +845,7 @@ function import_settings_all() {
 
 var ids = [
 	"value", "organ", "nightcap", "ismonday", "classid", "semirares", "workshed",
-	"saucemaven", "pizzalover", "breakfast", "coldone", "recall",
+	"saucemaven", "pizzalover", "breakfast", "coldone", "recall", "drinking",
 	"tuxedo", "mafiaring", "mimeglass", "tps", "pantsgiving", "sweatpants", "distention", "doghair",
 	"deepdish", "calzone", "pizza",
 	"speakeasy", "hollowleg",

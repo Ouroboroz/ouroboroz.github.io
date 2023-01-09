@@ -78,6 +78,7 @@ function tehtmi(diet_settings) {
 	var with_recall = diet_settings["ancestral recall available"]
 	var with_breakfast = diet_settings["spaghetti breakfast available"]
 	var with_cold_one = diet_settings["grab a cold one available"]
+	var with_drinking_to_drink = diet_settings["drinking to drink available"]
 	var try_field_gar = (diet_settings["use potion of the field gar"] == "yes")
 	var tuxedo_available = diet_settings["tuxedo shirt available"]
 	var tps_available = diet_settings["tiny plastic sword available"]
