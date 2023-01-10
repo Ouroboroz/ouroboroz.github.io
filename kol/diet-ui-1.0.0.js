@@ -130,6 +130,10 @@ function item_tooltip(e, elt, item, desc, settings) {
 				summary = true
 				add_row("\u2192 Special Seasoning", "+1")
 			}
+			if(opts["whet stone"]) {
+				summary = true
+				add_row("\u2192 Whet stone", "+1")
+			}
 			if(item["name"] == "Affirmation Cookie") {
 				summary = true
 				add_row("\u2192 Bonus", "+6")

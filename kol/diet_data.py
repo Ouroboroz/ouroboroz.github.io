@@ -1564,7 +1564,8 @@ diet_consumables = [
 ,   { "name": "Boulevardier cocktail", "advmin": 3, "advmax": 4, "price": 50000, "type": "booze", "size": [0, 1, 0] }
 ,   { "name": "bowl full of jelly", "advmin": 5, "advmax": 6, "price": 2370.58, "type": "food", "size": [1, 0, 0] }
 ,   { "name": "Eye and a Twist", "advmin": 5, "advmax": 6, "price": 7964.69, "type": "booze", "size": [0, 1, 0] }
-,   { "name": "marshmallow bomb", "advmin": 9, "advmax": 11, "price": 15999, "type": "booze", "size": [0, 2, 0] } ] 
+,   { "name": "marshmallow bomb", "advmin": 9, "advmax": 11, "price": 15999, "type": "booze", "size": [0, 2, 0] } 
+,   { "name": "whet stone", "advmin": 0, "advmax": 0, "price": 999999999 }] 
 
 CBB_consumables = [  
    { "name": "Boris's beer", "advmin": 5, "advmax": 7, "price": 999, "type": "booze", "size": [0, 1, 0] }

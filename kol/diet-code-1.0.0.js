@@ -127,6 +127,7 @@ function tehtmi(diet_settings) {
 	var taco_sauce_item
 	var dieting_pill_item
 	var special_seasoning_item
+	var whet_stone_item
 	var mayoflex_item
 	var mayodiol_item
 	
@@ -162,6 +163,8 @@ function tehtmi(diet_settings) {
 				dieting_pill_item = item
 			} else if(item["name"] == "Special Seasoning") {
 				special_seasoning_item = item
+			} else if(item["name"] == "whet stone"){
+				whet_stone_item = item
 			} else if(item["name"] == "Mayoflex") {
 				mayoflex_item = item
 			} else if(item["name"] == "Mayodiol") {
@@ -248,6 +251,10 @@ function tehtmi(diet_settings) {
 			if(opts["special seasoning"]) {
 				adv += 1
 			}
+
+			if(opts["whet stone"]) {
+				adv += 1
+			}
 			
 			// item-specific bonuses counted separately AFTER bonuses from munchies/fork/etc
 			
@@ -311,6 +318,11 @@ function tehtmi(diet_settings) {
 				opts["special seasoning"] = true
 			}
 		}
+		if(item["type"] == "food" && whet_stone_item) {
+			if(whet_stone_item["price"] + k_epsilon < adv_value) {
+				opts["whet stone"] = true
+			}
+		}
 		
 		var adv = calculate_adventures(item, opts)
 		var price = calculate_price(item)
@@ -328,6 +340,7 @@ function tehtmi(diet_settings) {
 		if(opts["mayodiol"]) price += 1000
 		if(opts["dieting pill"]) price += dieting_pill_item["price"]
 		if(opts["special seasoning"]) price += special_seasoning_item["price"]
+		if(opts["whet stone"]) price += whet_stone_item["price"]
 		var value = adv * adv_value - price
 		var fvalue = 0
 		if(opts["fortune"]) {
@@ -796,6 +809,7 @@ function tehtmi(diet_settings) {
 		var has_fork = spec["opts"] && spec["opts"]["salad fork"]
 		var has_spork = spec["opts"] && spec["opts"]["fudge spork"]
 		var has_seasoning = spec["opts"] && spec["opts"]["special seasoning"]
+		var has_whetstone = spec["opts"] && spec["opts"]["whet stone"]
 		var post_nightcap = include_nightcap && !has_mayodiol && size[1] > 0 && item["type"] == "food"
 		if(size[0] >= 0 && size[1] >= 0 && size[2] >= 0 && quick_fill(size[0], (post_nightcap ? 0 : size[1]), size[2], 0, quick_fill_cache) > spec["value"]) {
 			//console.log("useless item (1): ", item["name"], " (mayodiol:", has_mayodiol, ")", " (spork:", has_spork, ") (fork", has_fork, ") (season ", has_seasoning, ")")
@@ -1494,6 +1508,7 @@ function tehtmi(diet_settings) {
 		var with_mime_shotglass = node["mime shotglass"]
 		var with_dieting_pill = spec.opts && spec.opts["dieting pill"]
 		var with_special_seasoning = spec.opts && spec.opts["special seasoning"]
+		var with_whet_stone = spec.opts && spec.opts["whet stone"]
 		if(is_nightcap) {
 			key += " (nightcap)"
 		}
@@ -1526,6 +1541,9 @@ function tehtmi(diet_settings) {
 		}
 		if(with_special_seasoning) {
 			key += " (with special seasoning)"
+		}
+		if(with_whet_stone){
+			key += " (with whet stone)"
 		}
 		var entry = diet_map[key]
 		if(!entry) {
@@ -1632,6 +1650,9 @@ function tehtmi(diet_settings) {
 		}
 		if(spec.opts && spec.opts["special seasoning"]) {
 			notes.push({type: "item", verb: "with", item: special_seasoning_item, exclude: true})
+		}
+		if(spec.opts && spec.opts["whet stone"]) {
+			notes.push({type: "item", verb: "with", item: whet_stone_item, exclude: true})
 		}
 		if(spec.opts && spec.opts["mayoflex"]) {
 			notes.push({type: "item", verb: "with", item: mayoflex_item, exclude: true})
