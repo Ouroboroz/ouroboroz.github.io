@@ -19,6 +19,6 @@ void closet_valuable(int value)
 
 		put_closet(item_amount(it), it)
 	}
+	batch_close();
 	return
 }
-batch_close();
