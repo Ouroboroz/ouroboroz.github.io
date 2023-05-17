@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head profile="http://www.w3.org/2005/10/profile">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Kingdom of Loathing diet calculator</title>
+	<link rel="icon" type="image/gif" href="pie.gif">
+	<script type="text/javascript" src="diet-data-2022.08.22.js"></script>
+	<script type="text/javascript" src="diet-code-1.0.0.js"></script>
+	<script type="text/javascript" src="diet-notes-1.0.0.js"></script>
+	<script type="text/javascript" src="diet-ui-1.0.0.js"></script>
+	<style type="text/css">
+		html {
+			min-height: 100%;
+			position: relative;
+		}
+		body {
+			height: 100%;
+		}
+		#dietdiv table {
+			border-collapse: collapse;
+			border-style: solid;
+			width: 100%;
+		}
+		#dietdiv tbody {
+			border-width: thin;
+			border-style: solid;
+			border-color: gray;
+		}
+		#dietdiv th, #dietdiv td {
+			padding: 5px;
+		}
+		#dietdiv tfoot td {
+			font-weight: bold;
+		}
+		.quantity { text-align: right; }
+		.item { text-align: left; }
+		.turns { text-align: right; }
+		.cost { text-align: right; }
+		.notes { text-align: center; }
+		.nowrap { white-space: nowrap; }
+		@media (max-width: 60em) {
+			th[data-shorthand]:before { content: attr(data-shorthand); }
+			th[data-shorthand] span { display: none; }
+		}
+		@media (max-width: 45em) {
+			.notes { display: none; }
+		}
+		@media (max-width: 35em) {
+			.meatdesc { display: none; }
+		}
+		ul.checkbox {
+			margin: 0;
+			padding: 0;
+			margin-left: 20px;
+			list-style: none;
+		}
+		ul.checkbox li {
+			border: 1px transparent solid;
+			display: inline-block
+		}
+		#tooltip-container {
+			position: absolute;
+			top: 0px;
+			bottom: 0px;
+			display: flex;
+			flex-direction: column;
+			pointer-events: none;
+		}
+		#tooltip-spacer {
+			pointer-events: none;
+		}
+		#tooltip {
+			position: sticky;
+			top: 5px;
+			bottom: 5px;
+			width: 250px;
+			border: 1px solid #808080;
+			padding: 5px;
+			background-color: #F8F8F8;
+			pointer-events: none;
+			font-size: smaller;
+			font-family: sans-serif;
+		}
+		#tooltip table {
+			width: 250px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		#tooltip p {
+			margin: 0;
+		}
+		#tooltip hr {
+			border: 0px;
+		}
+		.tt-value {
+			text-align: right;
+			padding-left: 5px;
+		}
+		#blocker {
+			position: fixed;
+			left: 0px;
+			top: 0px;
+			width: 100%;
+			height: 100%;
+			z-index: 101;
+			
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			
+			background-color: rgba(0,0,0,.2);
+		}
+		.modal {
+			width: 400px;
+			height: 300px;
+			z-index: 102;
+			
+			border: 2px solid black;
+			padding: 5px;
+			background-color: white;
+			
+			position: absolute;
+			
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+		}
+		.modal-close {
+			position: absolute;
+			top: 5px;
+			right: 5px;
+		}
+		.modal * {
+			margin: 5px;
+		}
+	</style>
+</head>
+
+<body>
+<div id="blocker" style="display: none">
+	<div class="modal" id="import-export-modal" style="display: none">
+		<a href="javascript:disable_modal()" class="modal-close">[x]</a>
+		<h3>Current Profile</h3>
+		<div>Data: <input id="import-export-data"></div>
+		<div style="margin:0px"><button onclick="import_settings()">Import</button><button onclick="export_settings()">Export</button></div>
+		<div id="import-export-info" style="visibility: hidden;">No result...</div>
+		<h3>All Profiles</h3>
+		<div>Data: <input id="import-export-data-all"></div>
+		<div style="margin:0px"><button onclick="import_settings_all()">Import</button><button onclick="export_settings_all()">Export</button></div>
+		<div id="import-export-info-all" style="visibility: hidden;">No result...</div>
+	</div>
+	<div class="modal" id="profile-modal" style="display: none">
+		<a href="javascript:disable_modal()" class="modal-close">[x]</a>
+		<button onclick="new_profile()">New Profile</button>
+		<button onclick="delete_profile()">Delete Current Profile</button>
+		<div>Name: <input onchange="profile_data_changed()" id="profile-name"></input></div>
+	</div>
+	<div class="modal" id="about-modal" style="display: none;">
+		<a href="javascript:disable_modal()" class="modal-close">[x]</a>
+		<p>Maintained by Ouroboroz (#3184101) <a href="mailto:hbyang@mit.edu">[contact]</a></p>
+		<p>Created by tehtmi (#1214057) </p>
+		<p>Based on the work of Eleron (#1564433, <a href="http://alliancefromhell.com/" target="_blank">AFH</a>) / houeland</p>
+	</div>
+	<div class="modal" id="changes-modal" style="display: none;">
+		<a href="javascript:disable_modal()" class="modal-close">[x]</a>
+		<h3>Changes</h3>
+		<div style="overflow-y: auto; width: 100%; height: 100%; text-align: left; font-size: small;"><p>2020-01-09</p><ul>
+		<li> Added whet stone support </li>
+		<li>Added Drinking to Drink still from the Neverending Party</li>
+		<li>Included selection of distention/hair-of-dog pills to alter organ space</li>
+		<li>Added support for organ changing equipment such as Pantsgiving, Designer Sweatpants</li>
+		<li>Settings are now automatically saved in the browser's local storage. (Old bookmarks that encode the settings in the URL should continue to work, overriding the new method, but this feature is deprecated.)</li>
+		<li>Added profiles. (Hopefully this will appease people who had multiple versions of linked settings.)
+		<li>Excluded items are now saved. (There is also an option to purge the exclude list in case it gets to long.)</li>
+		<li>Interface slightly redesigned.</li>
+		<li>Some more detailed information is now shown in tooltips. (Populating this data is a work in progress.)</li>
+		<li>Component items (e.g. salad fork) can now be excluded separately.</li>
+		<li>Milk of magnesium upated for the 2020 game update. (Impetuous Sauciness option is removed as it no longer has an effect.)</li>
+		<li>Clan speakeasy drinks are now supported.</li>
+		<li>Semi-rare value is now estimated based on actual mall prices.</li>
+		<li>Eldritch mushroom pizza and haunted pizza are now tagged as pizza.</li>
+		<li>Links to the coldfront wiki are no longer broken. (They are now direct links rather than search links as well.)</li>
+		<li>Fixed potion of the field gar. (This used to work, but was broken by a previous update.)</li>
+		<li>Fixed a problem where the calculator would incorrectly suggest extra size 1 booze items when using the mime army shotglass.</li>
+		<li>Fixed a problem where sometimes nightcap adventures could be incorrectly limited when not using the nightcap limit. (Ralph IX emerges triumphant.)</li>
+		<li>Fixed a problem with post-nightcap spleen (from pickle juice) not correctly respecting the nightcap limit.</li>
+		</ul><p>Beyond this point is prehistory...</p></div>
+	</div>
+</div>
+<h2>Kingdom of Loathing diet calculator</h2>
+	<form id="dropdown_interface">
+	<select id="profile" onchange="profile_changed()" style="display: none;"></select>
+	<select id="value" onchange="settings_changed()">
+		<option  value="100">1 adventure = 100 meat</option>
+		<option  value="1000">1 adventure = 1k meat</option>
+		<option  value="1500">1 adventure = 1.5k meat</option>
+		<option selected="selected" value="2000">1 adventure = 2k meat</option>
+		<option  value="2500">1 adventure = 2.5k meat</option>
+		<option  value="5000">1 adventure = 5k meat</option>
+		<option  value="20000">1 adventure = 20k meat</option>
+		<option  value="1000000">1 adventure = 1M meat</option>
+		<option  value="custom">Customize adventure value</option>
+	</select>
+	<select id="organ" onchange="settings_changed()">
+		<option  value="none">No organ of steel</option>
+		<option  value="stomach">Stomach of Steel</option>
+		<option selected="selected" value="liver">Liver of Steel</option>
+		<option  value="spleen">Spleen of Steel</option>
+		<option  value="best">Use the best steel organ</option>
+		<option  value="custom">Customize organ space</option>
+	</select>
+	<select id="nightcap" onchange="settings_changed()">
+		<option  value="no">Don't overdrink</option>
+		<option selected="selected" value="yes">Include nightcap</option>
+		<option  value="limited">Limited nightcap</option>
+	</select>
+	<select id="ismonday" onchange="settings_changed()">
+		<option selected="selected" value="no">Not eating on a Monday</option>
+		<option  value="yes">Eating on a Monday</option>
+	</select>
+	
+	<select id="classid" onchange="settings_changed()">
+		<option selected="selected" value="0">Other class</option>
+		<option  value="1">Seal Clubber</option>
+		<option  value="2">Turtle Tamer</option>
+		<option  value="3">Pastamancer</option>
+		<option  value="4">Sauceror</option>
+		<option  value="5">Disco Bandit</option>
+		<option  value="6">Accordion Thief</option>
+	</select>
+	<select id="semirares" onchange="settings_changed()">
+		<option  selected="selected" value="0">No semirares</option>
+	<!--
+		<option  value="1">1 semirare available</option>
+		<option selected="selected" value="2">2 semirares available</option>
+		<option  value="3">3 semirares available</option>
+		<option  value="4">4 semirares available</option>
+		<option  value="5">5 semirares available</option>
+	-->
+	</select>
+	<select id="workshed" onchange="settings_changed()">
+		<option selected="selected" value="none">No extra workshed item</option>
+		<option  value="mayo">Mayo Clinic</option>
+	</select>
+	
+	<input type="checkbox" id="newlife" onchange="showCBB()"><label for="newlife">New Ascension</label>
+
+	<script>
+	function showCBB() {
+	  var checkBox = document.getElementById("newlife");
+	  var text = document.getElementById("CBB");
+	  var deepdish = document.getElementById("deepdish")
+	  var calzone = document.getElementById("calzone")
+	  var pizza = document.getElementById("pizza")
+	  if (checkBox.checked == true){
+	    text.style.display = "block";
+	  } else {
+	     text.style.display = "none";
+	     deepdish.checked = ""
+	     calzone.checked = ""
+	     pizza.checked = ""
+	     settings_changed()
+	  }
+	}
+	</script>
+
+
+	<fieldset>
+		<legend>Skills</legend>
+		<ul class="checkbox">
+		<li><input type="checkbox" checked="checked" id="saucemaven" onchange="settings_changed()"><label for="saucemaven">Saucemaven</label></li>
+		<li><input type="checkbox"  id="pizzalover" onchange="settings_changed()"><label for="pizzalover">Pizza Lover</label></li>
+		<li><input type="checkbox"  id="breakfast" onchange="settings_changed()"><label for="breakfast">Spaghetti Breakfast</label></li>
+		<li><input type="checkbox"  id="coldone" onchange="settings_changed()"><label for="coldone">Grab a Cold One</label></li>
+		<li><input type="checkbox"  id="recall" onchange="settings_changed()"><label for="recall">Ancestral Recall</label></li>
+		<li><input type="checkbox"  id="drinking" onchange="settings_changed()"><label for="drinking">Drinking to Drink</label></li>
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend>Items</legend>
+		<ul class="checkbox">
+		<li><input type="checkbox" checked="checked" id="tuxedo" onchange="settings_changed()"><label for="tuxedo">tuxedo shirt</label></li>
+		<li><input type="checkbox"  id="mafiaring" onchange="settings_changed()"><label for="mafiaring">mafia pinky ring</label></li>
+		<li><input type="checkbox"  id="mimeglass" onchange="settings_changed()"><label for="mimeglass">mime army shotglass</label></li>
+		<li><input type="checkbox"  id="tps" onchange="settings_changed()"><label for="tps">tiny plastic sword</label></li>
+		<li><input type="checkbox"  id="pantsgiving" onchange="settings_changed()"><label for="pantsgiving">Pantsgiving</label></li>
+		<li>
+			<select id="sweatpants" onchange="settings_changed()">
+				<option selected="selected" value=0> 0%</option>
+				<option value=1>25%</option>
+				<option value=2>50%</option>
+				<option value=3>75%</option>
+			</select>
+			<label for="sweatpants">Designer Sweatpants</label>
+		</li>
+		<li><input type="checkbox"  id="distention" onchange="settings_changed()"><label for="distention">distention pill</label></li>
+		<li><input type="checkbox"  id="doghair" onchange="settings_changed()"><label for="doghair">synthetic dog hair pill</label></li>
+
+		</ul>
+	</fieldset>
+
+	<fieldset id="CBB" style="display:none">
+		<legend> CBB Legendary Consumables </legend>
+		<ul class="checkbox">
+		<li><input type="checkbox" id="deepdish" onchange="settings_changed()"><label for="deepdish">Deep Dish of Legend</label></li>
+		<li><input type="checkbox" id="calzone" onchange="settings_changed()"><label for="calzone">Calzone of Legend</label></li>
+		<li><input type="checkbox" id="pizza" onchange="settings_changed()"><label for="pizza">Pizza of Legend</label></li>
+		</ul>
+	</fieldset>
+
+	<fieldset>
+		<legend>Clan</legend>
+		<ul class="checkbox">
+		<li><input type="checkbox" checked="checked" id="speakeasy" onchange="settings_changed()"><label for="speakeasy">speakeasy</label></li>
+		<li><input type="checkbox" id="hollowleg" onchange="settings_changed()"><label for="hollowleg">Hollow Leg</label></li>
+		</ul>
+	</fieldset>
+	
+	<p style="display: none" id="customize_adventure_value">
+	Adventure value: <input id="adventure_value" value="2000" onchange="settings_changed()">
+	PvP fight value: <input id="pvpfight_value" value="0" onchange="settings_changed()">
+	</p>
+	<p style="display: none" id="customize_organ_space">
+	Food: <input id="food_space" value="15" onchange="settings_changed()" size="5">
+	Booze: <input id="booze_space" value="19" onchange="settings_changed()" size="5">
+	Spleen: <input id="spleen_space" value="15" onchange="settings_changed()" size="5">
+	</p>
+	<p style="display: none" id="customize_nightcap">
+	Nightcap adventure limit: <input id="nightcap_limit" value="75" onchange="settings_changed()" size="5"> <small>(Note: this option is a work in progress)</small>
+	</p>
+	<a href="javascript:import_export_settings_dialog()" style="float: right">[import/export settings]</a>
+	<a href="javascript:profiles_dialog()" style="float: right">[profiles]</a>
+	</form>
+<p></p>
+<div id="dietdiv"></div>
+<noscript>
+<p style="color: maroon; font-weight: bold;">
+This page computes the optimal diet in JavaScript, so running scripts must be enabled for the page to work.
+</p>
+</noscript>
+<p><small><a href="javascript:about()">[about]</a> | <a href="javascript:changes()">[changes]</a> | Price data last updated: 2023-04-30</small></p>
+<script text="text-javascript">settings_changed()</script>
+</body></html>
