@@ -177,7 +177,12 @@ function tehtmi(diet_settings) {
 		var sum = 0.0
 		var count = 0.0
 		if(item["advmax"] == 0) return 0
-		for(var base_adv = item["advmin"]; base_adv <= item["advmax"]; ++base_adv) {
+		// Special seasoning increases the minimum adventures by 1
+		// If the delta between min and max is 0, then max is also increased by 1
+		var seasoning_bonus = opts["special seasoning"] ? 1 : 0
+		var min = item["advmin"] + seasoning_bonus
+		var max = item["advmax"] === item["advmin"] ? min : item["advmax"]
+		for(var base_adv = min; base_adv <= max; ++base_adv) {
 			var adv = base_adv
 			
 			if(opts["munchies pill"]) {
@@ -247,10 +252,6 @@ function tehtmi(diet_settings) {
 			if(opts["mayoflex"]) {
 				adv += 1
 			}
-			
-			if(opts["special seasoning"]) {
-				adv += 1
-			}
 
 			if(opts["whet stone"]) {
 				adv += 1
@@ -314,7 +315,8 @@ function tehtmi(diet_settings) {
 			}
 		}
 		if(item["type"] == "food" && special_seasoning_item) {
-			if(special_seasoning_item["price"] + k_epsilon < adv_value) {
+			var max_seasoning_value = item["advmin"] === item["advmax"] ? adv_value : 0.5 * adv_value;
+			if(special_seasoning_item["price"] + k_epsilon < max_seasoning_value) {
 				opts["special seasoning"] = true
 			}
 		}

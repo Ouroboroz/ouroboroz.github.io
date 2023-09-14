@@ -128,7 +128,7 @@ function item_tooltip(e, elt, item, desc, settings) {
 			}
 			if(opts["special seasoning"]) {
 				summary = true
-				add_row("\u2192 Special Seasoning", "+1")
+				add_row("\u2192 Special Seasoning", item.advmin == item.advmax ? "+1" : "+0.5")
 			}
 			if(opts["whet stone"]) {
 				summary = true
